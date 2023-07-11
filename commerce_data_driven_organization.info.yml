@@ -1,0 +1,5 @@
+name: 'Commerce Data Driven Organization'
+type: module
+description: 'Dynamic and intelligent management of orders and stock.'
+core_version_requirement: 8.x || 9.x || 10.x
+package: 'Custom'

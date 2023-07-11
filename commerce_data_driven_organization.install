@@ -1,0 +1,48 @@
+<?php
+/**
+ * Implements hook_schema().
+ */
+function commerce_data_driven_organization_schema() {
+  $schema['commerce_data_driven_organization__stock_optimization'] = array(
+    'description' => 'A table to store simple data',
+    'fields' => array(
+      'valoracion_stock' => array(
+        'description' => 'Valoracion de Stock',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+      'order_total_price' => array(
+              'description' => 'Ganancias Totales',
+              'type' => 'varchar',
+              'length' => '50',
+              'not null' => TRUE,
+      ),
+      'order_price_cost' => array(
+              'description' => 'Precio Coste de los pedidos',
+              'type' => 'varchar',
+              'length' => '50',
+              'not null' => TRUE,
+      ),
+      'total_benefit' => array(
+              'description' => 'Beneficio Total',
+              'type' => 'varchar',
+              'length' => '50',
+              'not null' => TRUE,
+      ),
+      'margin_over_sale' => array(
+        'description' => 'Margen de venta',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+      'global_rotation' => array(
+              'description' => 'Global stock rotation',
+              'type' => 'varchar',
+              'length' => '50',
+              'not null' => TRUE,
+      ),
+    ),
+  );
+  return $schema;
+}

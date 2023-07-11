@@ -1,0 +1,105 @@
+<?php
+
+function commerce_data_driven_organization_preprocess_page(&$variables)
+{
+// drupal_flush_all_caches();
+
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  $request = \Drupal::service('request_stack')->getCurrentRequest();
+  $requestUri = $request->getRequestUri();
+  $complete = (substr($requestUri, -9));
+  $order = \Drupal::routeMatch()->getParameter('commerce_order');
+  $state = 'ninguno';
+  $page_completation = \Drupal::routeMatch()->getRouteName();
+
+  if(isset($order) && $complete !== '/payments' && $page_completation !== 'view.commerce_order_payments.page_1') {
+    if ($order instanceof \Drupal\commerce_order\Entity\OrderInterface) {
+      if ($order->getState() !== null) {
+        $state = $order->getState()->getLabel();
+      }
+    }
+  }
+  if ($page_completation =='commerce_checkout.form'){
+    $order = \Drupal::routeMatch()->getParameter('commerce_order');
+    $id = $order->order_id->value;
+    $database = \Drupal::database();
+    $stock_decrementado = 'Si';
+
+    $query = $database->upsert('commerce_order__field_stock_decrementado');
+    $query->fields([
+      'bundle',
+      'deleted',
+      'entity_id',
+      'revision_id',
+      'langcode',
+      'delta',
+      'field_stock_decrementado_value',
+    ]);
+    $query->values([
+      'physical',
+      0,
+      $id,
+      $id,
+      'und',
+      0,
+      $stock_decrementado,
+    ]);
+    $query->key('entity_id');
+    $query->execute();
+  }else if($state == 'Decrementar stock'){
+    $order = \Drupal::routeMatch()->getParameter('commerce_order');
+    $id = $order->order_id->value;
+    $database = \Drupal::database();
+//      $estado = $database->query("SELECT state FROM commerce_order WHERE order_id = $id")
+//        ->fetchCol()[0];
+//      dump($estado);
+    $stock_decrementado = 'Si';
+    $query = $database->upsert('commerce_order__field_stock_decrementado');
+    $query->fields([
+      'bundle',
+      'deleted',
+      'entity_id',
+      'revision_id',
+      'langcode',
+      'delta',
+      'field_stock_decrementado_value',
+    ]);
+    $query->values([
+      'physical',
+      0,
+      $id,
+      $id,
+      'und',
+      0,
+      $stock_decrementado,
+    ]);
+    $query->key('entity_id');
+    $query->execute();
+  }else if($state == 'Cancelado'){
+    $order = \Drupal::routeMatch()->getParameter('commerce_order');
+    $id = $order->order_id->value;
+    $database = \Drupal::database();
+    $stock_decrementado = 'No';
+    $query = $database->upsert('commerce_order__field_stock_decrementado');
+    $query->fields([
+      'bundle',
+      'deleted',
+      'entity_id',
+      'revision_id',
+      'langcode',
+      'delta',
+      'field_stock_decrementado_value',
+    ]);
+    $query->values([
+      'physical',
+      0,
+      $id,
+      $id,
+      'und',
+      0,
+      $stock_decrementado,
+    ]);
+    $query->key('entity_id');
+    $query->execute();
+  }
+}

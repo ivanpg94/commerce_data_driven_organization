@@ -1,0 +1,23 @@
+entity.commerce_order.stockdecremento:
+  route_name: entity.commerce_order.stockdecremento
+  title: 'Decrementar stock'
+  appears_on:
+    - entity.commerce_order.canonical
+  options:
+    attributes:
+      id:
+        - 'decrementar'
+      class:
+        - 'decrementar'
+
+entity.commerce_order.stockaumento:
+  route_name: entity.commerce_order.stockaumento
+  title: 'Aumentar stock'
+  appears_on:
+    - entity.commerce_order.canonical
+  options:
+    attributes:
+      id:
+        - 'aumentar'
+      class:
+        - 'aumentar'

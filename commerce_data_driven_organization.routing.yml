@@ -1,0 +1,22 @@
+commerce_data_driven_organization.manageRotation:
+  path: '/admin/commerce/commerce_data_driven_organization'
+  defaults:
+    _title: 'commerce Data Driven Organization'
+    _controller: '\Drupal\commerce_data_driven_organization\Controller\StockOptimizationController::manageRotation'
+  requirements:
+    _permission: 'access commerce data driven organization'
+
+entity.commerce_order.stockdecremento:
+  path: /admin/commerce/orders/{commerce_order}/update
+  defaults:
+    _controller: \Drupal\commerce_data_driven_organization\Controller\StockDecremento::ajaxUpdateOrder
+    _title: 'stockdecremento'
+  requirements:
+    _permission: 'administer commerce_order'
+entity.commerce_order.stockaumento:
+  path: /admin/commerce/orders/{commerce_order}/cancel
+  defaults:
+    _controller: \Drupal\commerce_data_driven_organization\Controller\StockDecremento::ajaxCanceladoOrder
+    _title: 'stockaumento'
+  requirements:
+    _permission: 'administer commerce_order'

@@ -1,0 +1,9 @@
+commerce_data_driven_organization:
+  version: 1.x
+  js:
+    js/custom.js: {}
+
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/drupalSettings
